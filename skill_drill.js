@@ -33,3 +33,6 @@ var cityPop = cities.map(function(city) {
 });
 console.log(cityPop)
 
+
+
+
