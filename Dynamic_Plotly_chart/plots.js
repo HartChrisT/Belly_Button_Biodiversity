@@ -11,12 +11,29 @@ function init() {
                 .property("value", sample);
         });
     })}
+    
+    init();
+
+
+function buildMetadata(sample) {
+    d3.json("samples.json").then((data) => {
+        var metadata = data.metadata;
+        var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
+        var result = resultArray[0];
+        var PANEL = d3.select("#sample-metadata");
+
+        PANEL.html("");
+        (Object.entries(result).forEach(([key, value]) => {
+            PANEL.append("h5").text(key + ': ' + value + '\n')
+        }));
+    });
+}
+
+
 
 // Two functions are in this function and new sample refers to the id number selected from the menu.
 function optionChanged(newSample) {
     // console.log(newSample);
     buildMetadata(newSample);
-    buildCharts(newSample);
+    //buildCharts(newSample);
 }
-
-init();
